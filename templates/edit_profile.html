@@ -20,8 +20,16 @@
   <label>New Password (leave blank if unchanged):</label><br />
   <input type="password" name="password" /><br /><br />
 
-  <label>Profile Picture:</label><br />
-  <input type="file" name="profile_pic" /><br /><br />
+  <label for="profile_pic">Current Profile Picture:</label><br />
+  <img
+    src="{{ user.profile_pic }}"
+    alt="Profile Picture"
+    width="150"
+    height="150"
+  /><br /><br />
+
+  <label for="profile_pic">Change Profile Picture:</label>
+  <input type="file" name="profile_pic" id="profile_pic" /><br /><br />
 
   <!-- New fields -->
   <label>Date of Birth:</label><br />

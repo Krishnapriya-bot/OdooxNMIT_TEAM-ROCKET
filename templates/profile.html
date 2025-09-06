@@ -1,5 +1,14 @@
 {% extends "index.html" %} {% block content %}
-<h2>My Profile</h2>
+<h2>{{ user.username }}'s Profile</h2>
+{% if user.is_profile_complete() %}
+<span style="color: green; font-size: 2em">&#10004;</span>
+<!-- Green tick -->
+<span>Profile Complete</span>
+{% else %}
+<span style="color: red; font-size: 2em">&#10008;</span>
+<!-- Red cross -->
+<span>Profile Incomplete</span>
+{% endif %}
 <img src="{{ user.profile_pic }}" alt="Profile Picture" width="120" /><br />
 <p><strong>Username:</strong> {{ user.username }}</p>
 <p><strong>Email:</strong> {{ user.email }}</p>

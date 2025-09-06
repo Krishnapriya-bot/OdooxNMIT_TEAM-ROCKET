@@ -1,104 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EcoFinds - Sustainable Second-Hand Marketplace</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='landing.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h1>EcoFinds</h1>
-            </div>
-            <div class="nav-buttons">
-                <button class="nav-btn login-nav-btn" onclick="showLogin()">Login</button>
-                <button class="nav-btn signup-nav-btn" onclick="showSignup()">Sign Up</button>
-            </div>
+      <div class="nav-container">
+        <div class="nav-logo">
+          <h1>EcoFinds</h1>
         </div>
+        <div class="nav-buttons">
+          <a href="{{ url_for('login') }}"
+            ><button class="nav-btn login-nav-btn">Login</button></a
+          >
+          <a href="{{ url_for('register') }}"
+            ><button class="nav-btn signup-nav-btn">Register</button></a
+          >
+        </div>
+      </div>
     </nav>
 
     <!-- Main Hero Section -->
     <div class="hero-container">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h2 class="main-heading">You wanted</h2>
-                <h2 class="main-heading">we got it.</h2>
-                <p class="sub-heading">Discover unique second-hand treasures while making sustainable choices for a better tomorrow.</p>
-                <button class="explore-btn" onclick="exploreNow()">Explore Now</button>
-            </div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <h2 class="main-heading">You wanted</h2>
+          <h2 class="main-heading">we got it.</h2>
+          <p class="sub-heading">
+            Discover unique second-hand treasures while making sustainable
+            choices for a better tomorrow.
+          </p>
+          <a href="{{ url_for('home') }}">
+            <button class="explore-btn" onclick="exploreNow()">
+              Explore Now
+            </button>
+          </a>
         </div>
-        
-        <!-- Floating Event Cards (similar to EventHive style) -->
-        <div class="floating-cards">
-            <div class="event-card card-1">
-                <h4>Vintage Electronics</h4>
-                <p>Refurbished gadgets with character and history</p>
-                <span class="price">Starting ₹500</span>
-            </div>
-            
-            <div class="event-card card-2">
-                <h4>Pre-loved Books</h4>
-                <p>Stories waiting to find their next reader</p>
-                <span class="price">From ₹50</span>
-            </div>
-            
-            <div class="event-card card-3">
-                <h4>Fashion Finds</h4>
-                <p>Stylish clothing with sustainable appeal</p>
-                <span class="price">Up to 70% off</span>
-            </div>
-            
-            <div class="event-card card-4">
-                <h4>Home Decor</h4>
-                <p>Unique pieces to transform your space</p>
-                <span class="price">Best Deals</span>
-            </div>
+      </div>
+
+      <!-- Floating Event Cards (similar to EventHive style) -->
+      <div class="floating-cards">
+        <div class="event-card card-1">
+          <h4>Vintage Electronics</h4>
+          <p>Refurbished gadgets with character and history</p>
+          <span class="price">Starting ₹500</span>
         </div>
+
+        <div class="event-card card-2">
+          <h4>Pre-loved Books</h4>
+          <p>Stories waiting to find their next reader</p>
+          <span class="price">From ₹50</span>
+        </div>
+
+        <div class="event-card card-3">
+          <h4>Fashion Finds</h4>
+          <p>Stylish clothing with sustainable appeal</p>
+          <span class="price">Up to 70% off</span>
+        </div>
+
+        <div class="event-card card-4">
+          <h4>Home Decor</h4>
+          <p>Unique pieces to transform your space</p>
+          <span class="price">Best Deals</span>
+        </div>
+      </div>
     </div>
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h3>Welcome Back</h3>
-            <form class="auth-form">
-                <div class="input-group">
-                    <input type="email" placeholder="Email" required>
-                </div>
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="submit-btn">Login</button>
-            </form>
-            <p class="switch-auth">Don't have an account? <span onclick="switchToSignup()">Sign up</span></p>
-        </div>
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('loginModal')">&times;</span>
+        <h3>Welcome Back</h3>
+        <form class="auth-form">
+          <div class="input-group">
+            <input type="email" placeholder="Email" required />
+          </div>
+          <div class="input-group">
+            <input type="password" placeholder="Password" required />
+          </div>
+          <button type="submit" class="submit-btn">Login</button>
+        </form>
+        <p class="switch-auth">
+          Don't have an account? <span onclick="switchToSignup()">Sign up</span>
+        </p>
+      </div>
     </div>
-    
+
     <!-- Signup Modal -->
     <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('signupModal')">&times;</span>
-            <h3>Join EcoFinds</h3>
-            <form class="auth-form">
-                <div class="input-group">
-                    <input type="text" placeholder="Username" required>
-                </div>
-                <div class="input-group">
-                    <input type="email" placeholder="Email" required>
-                </div>
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="submit-btn">Sign Up</button>
-            </form>
-            <p class="switch-auth">Already have an account? <span onclick="switchToLogin()">Login</span></p>
-        </div>
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('signupModal')">&times;</span>
+        <h3>Join EcoFinds</h3>
+        <form class="auth-form">
+          <div class="input-group">
+            <input type="text" placeholder="Username" required />
+          </div>
+          <div class="input-group">
+            <input type="email" placeholder="Email" required />
+          </div>
+          <div class="input-group">
+            <input type="password" placeholder="Password" required />
+          </div>
+          <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+        <p class="switch-auth">
+          Already have an account? <span onclick="switchToLogin()">Login</span>
+        </p>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

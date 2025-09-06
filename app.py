@@ -42,14 +42,24 @@ class User(db.Model, UserMixin):
     orders = db.relationship("Order", backref="user", lazy=True)
     
     def is_profile_complete(self):
-        return all([self.age, self.address, self.city, self.pin_code, self.state, self.country])
+        return all([
+            self.dob,
+            self.address,
+            self.city,
+            self.pin_code,
+            self.state,
+            self.country
+        ])
 
+    # ------------------
+    # Calculate age dynamically
+    # ------------------
     def age(self):
         if self.dob:
             today = date.today()
             return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
         return None
-
+    
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
@@ -94,7 +104,7 @@ def home():
     return render_template("products.html", products=products)
 
 
-@app.route("/landing")
+@app.route("/ecofinds")
 def landing():
     return render_template("landing.html")
 
@@ -104,14 +114,24 @@ def register():
     if request.method == "POST":
         email = request.form["email"]
         username = request.form["username"]
-        password = bcrypt.generate_password_hash(request.form["password"]).decode("utf-8")
+        password = request.form["password"]
 
-        user = User(email=email, username=username, password=password)
+        # Check if email already exists
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash("Email already registered. Please log in instead.", "danger")
+            return redirect(url_for("login"))
+
+        hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+        user = User(email=email, username=username, password=hashed_password)
         db.session.add(user)
         db.session.commit()
+
         flash("Registration successful! Please log in.", "success")
         return redirect(url_for("login"))
+
     return render_template("register.html")
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -165,6 +185,22 @@ def edit_profile():
             upload_result = cloudinary.uploader.upload(file)
             current_user.profile_pic = upload_result["secure_url"]
 
+        # update address details
+        dob_str = request.form.get("dob")
+        if dob_str:
+            try:
+                current_user.dob = datetime.strptime(dob_str, "%Y-%m-%d").date()
+            except ValueError:
+                flash("Invalid date format for DOB. Please use YYYY-MM-DD.", "danger")
+                return redirect(url_for("edit_profile"))
+        else:
+            current_user.dob = None
+        current_user.address = request.form.get("address")
+        current_user.city = request.form.get("city")
+        current_user.pin_code = request.form.get("pin_code")
+        current_user.state = request.form.get("state")
+        current_user.country = request.form.get("country")
+
         db.session.commit()
         flash("Profile updated successfully!", "success")
         return redirect(url_for("profile"))
@@ -213,9 +249,9 @@ def add_product():
 
 
 @app.route("/product/<int:product_id>")
-def product_detail(product_id):
+def product_details(product_id):
     product = Product.query.get_or_404(product_id)
-    return render_template("product_detail.html", product=product)
+    return render_template("product_details.html", product=product)
 
 
 @app.route("/cart")
@@ -250,6 +286,18 @@ def buy_product(product_id):
     flash("Purchase successful!", "success")
     return redirect(url_for("home"))
 
+
+@app.route("/search")
+def search():
+    query = request.args.get("q", "").strip()
+    if not query:
+        return redirect(url_for("home"))  # or your main products listing route
+    products = Product.query.filter(
+        Product.title.ilike(f"%{query}%") |
+        Product.description.ilike(f"%{query}%") |
+        Product.category.ilike(f"%{query}%")
+    ).all()
+    return render_template("products.html", products=products, search_query=query)
 
 # ---------------- MAIN ---------------- #
 if __name__ == "__main__":

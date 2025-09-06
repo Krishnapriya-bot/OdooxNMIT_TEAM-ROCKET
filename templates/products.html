@@ -1,18 +1,29 @@
 {% extends "index.html" %} {% block content %}
 <h2>Available Products</h2>
+<form method="get" action="{{ url_for('search') }}" style="margin-bottom: 20px">
+  <input
+    type="text"
+    name="q"
+    placeholder="Search products..."
+    value="{{ search_query|default('') }}"
+  />
+  <button type="submit">Search</button>
+</form>
 <div class="products">
-  {% for product in products %}
+  {% if products %} {% for product in products %}
   <div class="product-card">
     <img src="{{ product.image_url }}" alt="Product" />
     <h3>{{ product.title }}</h3>
     <p>₹{{ product.price }}</p>
-    <a href="{{ url_for('product_detail', product_id=product.id) }}">View</a>
+    <a href="{{ url_for('product_details', product_id=product.id) }}">View</a>
     {% if current_user.is_authenticated %}
     <a href="{{ url_for('add_to_cart', product_id=product.id) }}"
       >Add to Cart</a
     >
     {% endif %}
   </div>
-  {% endfor %}
+  {% endfor %} {% else %}
+  <p>No products found.</p>
+  {% endif %}
 </div>
 {% endblock %}
