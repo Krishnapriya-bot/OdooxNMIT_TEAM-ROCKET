@@ -1,16 +1,17 @@
-{% extends "index.html" %}
-{% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='product_details.css') }}">
-{% endblock %}
-{% block content %}
+{% extends "index.html" %} {% block page_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='product_details.css') }}"
+/>
+{% endblock %} {% block content %}
 <div class="product-detail-container">
   <div class="product-detail-content">
     <div class="product-image-section">
       <div class="product-image-wrapper">
         <img
-          class="product-image"
-          src="{{ url_for('static', filename='img/placeholder.png') }}"
-          alt="Product"
+          src="{{ product.image_url }}"
+          alt="{{ product.title }}"
+          width="300"
         />
         <div class="image-overlay">
           <span class="category-badge">{{ product.category }}</span>
@@ -33,7 +34,10 @@
       </div>
       {% if current_user.is_authenticated %}
       <div class="product-actions">
-        <a class="add-to-cart-btn" href="{{ url_for('add_to_cart', product_id=product.id) }}">
+        <a
+          class="add-to-cart-btn"
+          href="{{ url_for('add_to_cart', product_id=product.id) }}"
+        >
           Add to Cart
         </a>
       </div>
