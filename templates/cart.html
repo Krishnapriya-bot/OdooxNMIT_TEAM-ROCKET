@@ -1,0 +1,13 @@
+{% extends "index.html" %} {% block content %}
+<h2>Your Cart</h2>
+{% if cart_items %}
+<ul>
+  {% for item in cart_items %}
+  <li>
+    {{ item.product.title }} - ₹{{ item.product.price }} (x{{ item.quantity }})
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %} {% endblock %}
