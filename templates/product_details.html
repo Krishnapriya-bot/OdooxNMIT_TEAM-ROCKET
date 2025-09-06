@@ -1,10 +1,44 @@
-{% extends "index.html" %} {% block content %}
-<h2>{{ product.title }}</h2>
-<img src="{{ product.image_url }}" alt="Product" />
-<p><strong>Price:</strong> ₹{{ product.price }}</p>
-<p><strong>Category:</strong> {{ product.category }}</p>
-<p><strong>Description:</strong> {{ product.description }}</p>
-
-{% if current_user.is_authenticated %}
-<a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
-{% endif %} {% endblock %}
+{% extends "index.html" %}
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='product_details.css') }}">
+{% endblock %}
+{% block content %}
+<div class="product-detail-container">
+  <div class="product-detail-content">
+    <div class="product-image-section">
+      <div class="product-image-wrapper">
+        <img
+          class="product-image"
+          src="{{ url_for('static', filename='img/placeholder.png') }}"
+          alt="Product"
+        />
+        <div class="image-overlay">
+          <span class="category-badge">{{ product.category }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="product-info-section">
+      <div class="product-header">
+        <h2 class="product-title">{{ product.title }}</h2>
+        <div class="price-container">
+          <span class="price-label">Price:</span>
+          <span class="product-price">₹{{ product.price }}</span>
+        </div>
+      </div>
+      <div class="product-details">
+        <div class="detail-item description-item">
+          <span class="detail-label">Description</span>
+          <span class="description-text">{{ product.description }}</span>
+        </div>
+      </div>
+      {% if current_user.is_authenticated %}
+      <div class="product-actions">
+        <a class="add-to-cart-btn" href="{{ url_for('add_to_cart', product_id=product.id) }}">
+          Add to Cart
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

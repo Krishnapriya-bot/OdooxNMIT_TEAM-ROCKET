@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
+    {% block page_css %}{% endblock %}
   </head>
   <body>
     <nav>
