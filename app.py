@@ -101,7 +101,7 @@ def load_user(user_id):
 @app.route("/")
 def home():
     products = Product.query.all()
-    return render_template("products.html", products=products)
+    return render_template("products2.html", products=products)
 
 
 @app.route("/ecofinds")
@@ -297,7 +297,7 @@ def search():
         Product.description.ilike(f"%{query}%") |
         Product.category.ilike(f"%{query}%")
     ).all()
-    return render_template("products.html", products=products, search_query=query)
+    return render_template("products2.html", products=products, search_query=query)
 
 # ---------------- MAIN ---------------- #
 if __name__ == "__main__":
