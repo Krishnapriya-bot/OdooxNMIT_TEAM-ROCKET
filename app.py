@@ -3,6 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_bcrypt import Bcrypt
 from datetime import datetime
+import cloudinary
+import cloudinary.uploader
+
+# configure with your Cloudinary account credentials
+cloudinary.config( 
+  cloud_name = "dqe6pcfu1", 
+  api_key = "265411233144585", 
+  api_secret = "iskIKE0EV55pzAxPUBxTZIkBqh8" 
+)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "supersecretkey"
@@ -20,11 +29,26 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    profile_pic = db.Column(db.String(300), default="https://via.placeholder.com/150")
+    dob = db.Column(db.Date, nullable=True)
+    address = db.Column(db.String(200), nullable=True)
+    city = db.Column(db.String(100), nullable=True)
+    pin_code = db.Column(db.String(20), nullable=True)
+    state = db.Column(db.String(100), nullable=True)
+    country = db.Column(db.String(100), nullable=True)
 
     products = db.relationship("Product", backref="owner", lazy=True)
     cart_items = db.relationship("Cart", backref="user", lazy=True)
     orders = db.relationship("Order", backref="user", lazy=True)
+    
+    def is_profile_complete(self):
+        return all([self.age, self.address, self.city, self.pin_code, self.state, self.country])
 
+    def age(self):
+        if self.dob:
+            today = date.today()
+            return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
+        return None
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -32,7 +56,7 @@ class Product(db.Model):
     description = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(50), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    image_url = db.Column(db.String(200), default="static/img/placeholder.png")
+    image_url = db.Column(db.String(300), default="https://via.placeholder.com/150")
 
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
@@ -68,6 +92,11 @@ def load_user(user_id):
 def home():
     products = Product.query.all()
     return render_template("products.html", products=products)
+
+
+@app.route("/landing")
+def landing():
+    return render_template("landing.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -108,22 +137,79 @@ def logout():
     flash("Logged out successfully!", "info")
     return redirect(url_for("home"))
 
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template("profile.html", user=current_user)
+
+
+@app.route("/profile/edit", methods=["GET", "POST"])
+@login_required
+def edit_profile():
+    if request.method == "POST":
+        username = request.form["username"]
+        email = request.form["email"]
+        password = request.form["password"]
+        file = request.files.get("profile_pic")
+
+        # update username/email
+        current_user.username = username
+        current_user.email = email
+
+        # update password only if filled
+        if password.strip():
+            current_user.password = bcrypt.generate_password_hash(password).decode("utf-8")
+
+        # update profile picture if uploaded
+        if file and file.filename != "":
+            upload_result = cloudinary.uploader.upload(file)
+            current_user.profile_pic = upload_result["secure_url"]
+
+        db.session.commit()
+        flash("Profile updated successfully!", "success")
+        return redirect(url_for("profile"))
+
+    return render_template("edit_profile.html", user=current_user)
+
+
 
 @app.route("/product/add", methods=["GET", "POST"])
 @login_required
 def add_product():
+    
+    if not current_user.is_profile_complete():
+        flash("Please complete your profile before listing a product.", "warning")
+        return redirect(url_for("edit_profile"))
+    
     if request.method == "POST":
         title = request.form["title"]
         description = request.form["description"]
         category = request.form["category"]
         price = float(request.form["price"])
 
-        product = Product(title=title, description=description, category=category, price=price, owner=current_user)
+        # handle file upload
+        image_url = "https://via.placeholder.com/150"
+        if "image" in request.files:
+            file = request.files["image"]
+            if file.filename != "":
+                upload_result = cloudinary.uploader.upload(file)
+                image_url = upload_result["secure_url"]
+
+        product = Product(
+            title=title,
+            description=description,
+            category=category,
+            price=price,
+            image_url=image_url,
+            owner=current_user
+        )
         db.session.add(product)
         db.session.commit()
         flash("Product added successfully!", "success")
         return redirect(url_for("home"))
+
     return render_template("add_product.html")
+
 
 
 @app.route("/product/<int:product_id>")
@@ -147,6 +233,22 @@ def add_to_cart(product_id):
     db.session.commit()
     flash("Product added to cart!", "success")
     return redirect(url_for("view_cart"))
+
+
+@app.route("/buy/<int:product_id>")
+@login_required
+def buy_product(product_id):
+    if not current_user.is_profile_complete():
+        flash("Please complete your profile before making a purchase.", "warning")
+        return redirect(url_for("edit_profile"))
+
+    product = Product.query.get_or_404(product_id)
+    order = Order(user_id=current_user.id, product_id=product.id, quantity=1)
+    db.session.add(order)
+    db.session.commit()
+
+    flash("Purchase successful!", "success")
+    return redirect(url_for("home"))
 
 
 # ---------------- MAIN ---------------- #

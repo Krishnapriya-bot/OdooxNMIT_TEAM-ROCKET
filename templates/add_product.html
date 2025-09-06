@@ -1,6 +1,5 @@
 {% extends "index.html" %} {% block content %}
-<h2>Add Product</h2>
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
   <label>Title:</label><br />
   <input type="text" name="title" required /><br /><br />
 
@@ -12,6 +11,9 @@
 
   <label>Price:</label><br />
   <input type="number" step="0.01" name="price" required /><br /><br />
+
+  <label>Image:</label><br />
+  <input type="file" name="image" /><br /><br />
 
   <button type="submit">Submit</button>
 </form>

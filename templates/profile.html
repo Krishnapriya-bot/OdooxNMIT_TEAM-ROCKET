@@ -1,0 +1,31 @@
+{% extends "index.html" %} {% block content %}
+<h2>My Profile</h2>
+<img src="{{ user.profile_pic }}" alt="Profile Picture" width="120" /><br />
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+
+<a href="{{ url_for('edit_profile') }}">Edit Profile</a>
+
+<hr />
+<h3>My Listings</h3>
+<ul>
+  {% for product in user.products %}
+  <li>{{ product.title }} - ₹{{ product.price }}</li>
+  {% else %}
+  <li>No listings yet.</li>
+  {% endfor %}
+</ul>
+
+<hr />
+<h3>My Orders</h3>
+<ul>
+  {% for order in user.orders %}
+  <li>
+    {{ order.product.title }} - ₹{{ order.product.price }} (x{{ order.quantity
+    }})
+  </li>
+  {% else %}
+  <li>No orders yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

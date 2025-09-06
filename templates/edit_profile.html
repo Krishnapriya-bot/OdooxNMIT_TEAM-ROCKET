@@ -1,0 +1,72 @@
+{% extends "index.html" %} {% block content %}
+<h2>Edit Profile</h2>
+<form method="POST" enctype="multipart/form-data">
+  <label>Username:</label><br />
+  <input
+    type="text"
+    name="username"
+    value="{{ user.username }}"
+    required
+  /><br /><br />
+
+  <label>Email:</label><br />
+  <input
+    type="email"
+    name="email"
+    value="{{ user.email }}"
+    required
+  /><br /><br />
+
+  <label>New Password (leave blank if unchanged):</label><br />
+  <input type="password" name="password" /><br /><br />
+
+  <label>Profile Picture:</label><br />
+  <input type="file" name="profile_pic" /><br /><br />
+
+  <!-- New fields -->
+  <label>Date of Birth:</label><br />
+  <input type="date" name="dob" value="{{ user.dob }}" required /><br /><br />
+
+  <label>Address:</label><br />
+  <input
+    type="text"
+    name="address"
+    value="{{ user.address or '' }}"
+    required
+  /><br /><br />
+
+  <label>Pin Code:</label><br />
+  <input
+    type="text"
+    name="pin_code"
+    value="{{ user.pin_code or '' }}"
+    required
+  /><br /><br />
+
+  <label>City:</label><br />
+  <input
+    type="text"
+    name="city"
+    value="{{ user.city or '' }}"
+    required
+  /><br /><br />
+
+  <label>State:</label><br />
+  <input
+    type="text"
+    name="state"
+    value="{{ user.state or '' }}"
+    required
+  /><br /><br />
+
+  <label>Country:</label><br />
+  <input
+    type="text"
+    name="country"
+    value="{{ user.country or '' }}"
+    required
+  /><br /><br />
+
+  <button type="submit">Save Changes</button>
+</form>
+{% endblock %}
