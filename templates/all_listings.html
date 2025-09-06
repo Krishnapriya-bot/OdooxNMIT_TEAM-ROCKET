@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="profile-container">
+  <div class="card">
+    <h2>All My Listings</h2>
+    <hr />
+    <div class="item-list">
+      {% for product in user.products %}
+      <div class="item">
+        <span>📦 {{ product.title }}</span>
+        <span class="price">₹{{ product.price }}</span>
+      </div>
+      {% else %}
+      <p>No listings available.</p>
+      {% endfor %}
+    </div>
+    <a href="{{ url_for('profile') }}" class="view-more-btn">Back to Profile</a>
+  </div>
+</div>
+{% endblock %}

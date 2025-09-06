@@ -6,6 +6,11 @@ from datetime import datetime
 import cloudinary
 import cloudinary.uploader
 
+from flask import render_template
+from flask_login import login_required, current_user
+
+
+
 # configure with your Cloudinary account credentials
 cloudinary.config( 
   cloud_name = "dqe6pcfu1", 

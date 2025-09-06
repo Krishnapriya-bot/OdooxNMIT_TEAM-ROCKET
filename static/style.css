@@ -691,3 +691,21 @@ hr {
   font-weight: bold;
   font-size: 1.1em;
 }
+
+
+/*new listings*/
+.view-more-btn {
+  display: inline-block;
+  margin-top: 15px;
+  text-decoration: none;
+  background-color: #e2b14c;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.view-more-btn:hover {
+  background-color: #c99733;
+}
