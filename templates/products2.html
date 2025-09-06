@@ -29,9 +29,8 @@
         <div class="menu">
           <ul>
             <li>
-              <a href="{{ url_for('home') }}"
-                ><i class="fa fa-home"></i> Home</a
-              >
+              <a href="{{ url_for('home') }}">
+                <i class="fa fa-home"></i> Home</a>
             </li>
             <li>
               <a href="{{ url_for('search') }}"
@@ -80,13 +79,23 @@
               <i class="fa-solid fa-bars"></i>
             </label>
           </div>
-          <div style="color: #e5a12e">
-            <a href="{{ url_for('home') }}" style="text-decoration: none"
+          <div>
+            <a href="{{ url_for('home') }}" style="text-decoration: none; color: #e5a12e"
               ><h1>EcoFinds</h1></a
             >
           </div>
-          <a href="{{ url_for('search') }}" class="header-link">Search</a>
-          <a href="{{ url_for('home') }}" class="header-link">Products</a>
+          <a
+            href="{{ url_for('search') }}"
+            class="header-link"
+            style="text-decoration: none; color: #e5a12e;"
+            >Search</a
+          >
+          <a
+            href="{{ url_for('home') }}"
+            class="header-link"
+            style="text-decoration: none; color: #e5a12e;"
+            >Products</a
+          >
         </div>
         <div class="header-right">
           {% if current_user.is_authenticated %}
@@ -104,8 +113,15 @@
           <a href="{{ url_for('cart') }}">Cart</a>
           <a href="{{ url_for('logout') }}">Logout</a>
           {% else %}
-          <a href="{{ url_for('login') }}">Login</a>
-          <a href="{{ url_for('register') }}">Register</a>
+          <a
+            href="{{ url_for('login') }}"
+            style="text-decoration: none; color: #e5a12e"
+            >Login</a
+          >
+
+          <a href="{{ url_for('register') }}" style="text-decoration: none; color: #e5a12e""
+            >Register</a
+          >
           {% endif %}
         </div>
       </div>
