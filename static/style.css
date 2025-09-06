@@ -7,7 +7,7 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: #ffffff;
-    color: #4a5568;
+    color: black;
     line-height: 1.5;
 }
 
@@ -29,7 +29,7 @@ body {
 
 .login-form-wrapper {
     width: 100%;
-    max-width: 28rem;
+    max-width: 50rem;
 }
 
 /* Logo section */
@@ -51,18 +51,18 @@ body {
 .logo-text {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #2d3748;
+    color: black;
 }
 
 .login-title {
     font-size: 1.875rem;
     font-weight: 600;
-    color: #2d3748;
+    color: black;
     margin-bottom: 0.5rem;
 }
 
 .login-subtitle {
-    color: #718096;
+    color: black;
     font-size: 1rem;
 }
 
@@ -79,7 +79,7 @@ body {
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #2d3748;
+    color: black;
     margin-bottom: 0.5rem;
 }
 
@@ -90,19 +90,19 @@ body {
     border: 1px solid #e2e8f0;
     border-radius: 0.5rem;
     background: #ffffff;
-    color: #2d3748;
+    color: black;
     font-size: 0.875rem;
     transition: all 0.2s ease;
 }
 
 .form-input:focus {
     outline: none;
-    border-color: #f4d03f;
+    border-color: black;
     box-shadow: 0 0 0 3px rgba(244, 208, 63, 0.1);
 }
 
 .form-input::placeholder {
-    color: #a0aec0;
+    color: black;
 }
 
 
@@ -117,14 +117,14 @@ body {
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: #a0aec0;
+    color: black;
     cursor: pointer;
     padding: 0.25rem;
-    transition: color 0.2s ease;
+    transition: color 0blacke;
 }
 
 .password-toggle:hover {
-    color: #4a5568;
+    color: black;
 }
 
 .icon {
@@ -153,24 +153,24 @@ body {
 .checkbox {
     width: 1rem;
     height: 1rem;
-    accent-color: #f4d03f;
+    accent-color: black;
 }
 
 .checkbox-label {
     font-size: 0.875rem;
-    color: #4a5568;
+    color: black;
     cursor: pointer;
 }
 
 .forgot-link {
     font-size: 0.875rem;
-    color: #f4d03f;
+    color: black;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0blacke;
 }
 
 .forgot-link:hover {
-    color: #f1c40f;
+    color: black;
 }
 
 /* Submit button */
@@ -178,7 +178,7 @@ body {
     width: 100%;
     height: 3.5rem;
     background: #f4d03f;
-    color: #2c3e50;
+    color: black;
     border: none;
     border-radius: 0.5rem;
     font-size: 0.875rem;
@@ -201,18 +201,18 @@ body {
 
 .signup-text {
     font-size: 0.875rem;
-    color: #718096;
+    color: black;
 }
 
 .signup-link {
-    color: #f4d03f;
+    color: black;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: color 0blacke;
 }
 
 .signup-link:hover {
-    color: #f1c40f;
+    color: black;
 }
 
 
@@ -235,3 +235,352 @@ body {
         max-width: 100%;
     }
 }
+
+
+body {
+border-color: black;
+
+  font-family: 'Segoe UI', Arial, sans-serif;
+  padding: 40px 0;
+  color: black;
+  
+
+h2 {
+  text-align: center;
+  color: black;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+form {
+  background: #3c817b;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 35px 32px 25px 32px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  color: black;
+  font-size: 1.07rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="text"],
+input[type="number"],
+textarea{
+  width: 100%;
+  padding: 11px 12px;
+  border: 2px solid #E5A12E;
+  border-radius: 7px;
+  outline: none;
+  border-color: black;
+}
+  color: black;font-size: 1rem;
+  transition: border-color 0black;
+input:focus, textarea:focus {
+  border-color: black;
+  background: #ffffff;
+}
+
+button[type="submit"] {
+  background: #E5A12E;
+  color: black ; 
+  border-color: black;
+
+  border: none;
+  border-radius: 7px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition:  0.15s color 0black;
+}
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background: #3c817b;
+  color: black;
+  outline: 2px solid #E5A12E;
+}
+}
+
+
+/*uplaod product css*/
+
+  * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3c817b 0%, #2a5d59 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h2 {
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #2a5d59;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #E5A12E;
+            display: inline-block;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #2a5d59;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #3c817b;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(60, 129, 123, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .category-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .category-option {
+            position: relative;
+        }
+
+        .category-option input[type="checkbox"] {
+            display: none;
+        }
+
+        .category-option label {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            margin-bottom: 0;
+            font-size: 13px;
+        }
+
+        .category-option input[type="checkbox"]:checked + label {
+            background: #3c817b;
+            color: white;
+            border-color: #3c817b;
+        }
+
+        .image-upload-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .upload-area {
+            border: 2px dashed #3c817b;
+      
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #E5A12E;
+            background: #fefefe;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: #3c817b;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: #2a5d59;
+            font-weight: 500;
+        }
+
+        .upload-subtext {
+            color: #6c757d;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3c817b 0%, #2a5d59 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(60, 129, 123, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #2a5d59;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            border-color: #3c817b;
+            background: #f8f9fa;
+        }
+
+        .auto-generate-btn {
+            background: #E5A12E;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .auto-generate-btn:hover {
+            background: #d4931f;
+        }
+
+        .price-input-group {
+            position: relative;
+        }
+
+        .price-input-group::before {
+         
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .price-input-group input {
+            padding-left: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
