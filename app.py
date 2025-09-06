@@ -256,7 +256,7 @@ def product_details(product_id):
 
 @app.route("/cart")
 @login_required
-def view_cart():
+def cart():
     cart_items = Cart.query.filter_by(user_id=current_user.id).all()
     return render_template("cart.html", cart_items=cart_items)
 
@@ -268,7 +268,7 @@ def add_to_cart(product_id):
     db.session.add(cart_item)
     db.session.commit()
     flash("Product added to cart!", "success")
-    return redirect(url_for("view_cart"))
+    return redirect(url_for("cart"))
 
 
 @app.route("/buy/<int:product_id>")
