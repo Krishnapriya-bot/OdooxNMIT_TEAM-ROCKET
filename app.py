@@ -6,11 +6,6 @@ from datetime import datetime
 import cloudinary
 import cloudinary.uploader
 
-from flask import render_template
-from flask_login import login_required, current_user
-
-
-
 # configure with your Cloudinary account credentials
 cloudinary.config( 
   cloud_name = "dqe6pcfu1", 
@@ -167,6 +162,11 @@ def logout():
 def profile():
     return render_template("profile.html", user=current_user)
 
+@app.route('/listings')
+@login_required
+def all_listings():
+    return render_template('all_listings.html', user=current_user)
+
 
 @app.route("/profile/edit", methods=["GET", "POST"])
 @login_required
@@ -265,12 +265,27 @@ def cart():
     cart_items = Cart.query.filter_by(user_id=current_user.id).all()
     return render_template("cart.html", cart_items=cart_items)
 
+@app.route("/cart/remove/<int:item_id>")
+@login_required
+def remove_from_cart(item_id):
+    cart_item = Cart.query.get_or_404(item_id)
+    if cart_item.user_id != current_user.id:
+        flash("Unauthorized action.", "danger")
+        return redirect(url_for("cart"))
+    db.session.delete(cart_item)
+    db.session.commit()
+    flash("Item removed from cart.", "success")
+    return redirect(url_for("cart"))
 
 @app.route("/cart/add/<int:product_id>")
 @login_required
 def add_to_cart(product_id):
-    cart_item = Cart(user_id=current_user.id, product_id=product_id, quantity=1)
-    db.session.add(cart_item)
+    cart_item = Cart.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+    if cart_item:
+        cart_item.quantity += 1
+    else:
+        cart_item = Cart(user_id=current_user.id, product_id=product_id, quantity=1)
+        db.session.add(cart_item)
     db.session.commit()
     flash("Product added to cart!", "success")
     return redirect(url_for("cart"))

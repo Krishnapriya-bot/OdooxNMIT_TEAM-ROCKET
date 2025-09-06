@@ -9,28 +9,67 @@
     />
     {% block page_css %}{% endblock %}
   </head>
-  <body>
-    <nav>
-      <a href="{{ url_for('home') }}">Home</a>
+  <body style="padding: 0;">
+    <div class="header-container">
+  <div class="header">
+    <div class="header-left">
+      <div class="btn_one">
+        <label for="check">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+      </div>
+      <div>
+        <a href="{{ url_for('home') }}" style="text-decoration: none; color: #e5a12e">
+          <h1>EcoFinds</h1>
+        </a>
+      </div>
+    </div>
+    <div class="header-right">
       {% if current_user.is_authenticated %}
-      <a href="{{ url_for('add_product') }}">Add Product</a>
-      <a href="{{ url_for('cart') }}">Cart</a>
-      <a href="{{ url_for('logout') }}">Logout</a>
-      <a href="{{ url_for('profile') }}">{{ current_user.username }}</a>
+        <a href="{{ url_for('profile') }}">Welcome, {{ current_user.username }}</a>
+        <a href="{{ url_for('add_product') }}">Add Product</a>
+        <a href="{{ url_for('cart') }}">Cart</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
       {% else %}
-      <a href="{{ url_for('login') }}">Login</a>
-      <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('login') }}" style="text-decoration: none; color: #e5a12e">Login</a>
+        <a href="{{ url_for('register') }}" style="text-decoration: none; color: #e5a12e">Register</a>
       {% endif %}
-    </nav>
-    <hr />
+    </div>
+  </div>
+</div>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %}
-    <ul>
+    <!-- In index.html -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
       {% for category, msg in messages %}
-      <li><strong>{{ category.title() }}:</strong> {{ msg }}</li>
+        <div class="flash flash-{{ category }}">
+          <span class="flash-icon">
+            {% if category == 'success' %}
+              ✔️
+            {% elif category == 'danger' or category == 'error' %}
+              ❌
+            {% elif category == 'warning' %}
+              ⚠️
+            {% else %}
+              ℹ️
+            {% endif %}
+          </span>
+          <span class="flash-text"><strong>{{ category.title() }}:</strong> {{ msg }}</span>
+        </div>
       {% endfor %}
-    </ul>
-    {% endif %} {% endwith %} {% block content %}{% endblock %}
+    </div>
+  {% endif %}
+{% endwith %} {% block content %}{% endblock %}
+<script>
+  setTimeout(function() {
+    const flashes = document.querySelectorAll('.flash');
+    flashes.forEach(flash => {
+      flash.style.opacity = '0';
+      flash.style.transition = 'opacity 0.5s';
+      setTimeout(() => flash.remove(), 500);
+    });
+  }, 2000);
+</script>
   </body>
 </html>

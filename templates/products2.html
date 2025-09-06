@@ -99,17 +99,7 @@
         </div>
         <div class="header-right">
           {% if current_user.is_authenticated %}
-          <span>Welcome, {{ current_user.username }}</span>
-          {% if current_user.profile_pic %}
-          <img
-            src="{{ current_user.profile_pic }}"
-            alt="Profile"
-            style="width: 40px; height: 40px; border-radius: 50%"
-          />
-          {% else %}
-          <i class="fa-solid fa-user"></i>
-          {% endif %}
-          <a href="{{ url_for('profile') }}">Profile</a>
+          <a href="{{ url_for('profile') }}">Welcome, {{ current_user.username }}</a>
           <a href="{{ url_for('add_product') }}">Add Product</a>
           <a href="{{ url_for('cart') }}">Cart</a>
           <a href="{{ url_for('logout') }}">Logout</a>

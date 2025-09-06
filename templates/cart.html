@@ -315,14 +315,6 @@
                                 <div class="item-price">₹{{ item.product.price }}</div>
                                 <div class="item-quantity">Quantity: {{ item.quantity }}</div>
                             </div>
-                            <div class="item-actions">
-                                <form method="POST" action="{{ url_for('remove_from_cart', item_id=item.id) }}">
-                                    <!-- If you use Flask-WTF, include {{ form.csrf_token }} here -->
-                                    <button type="submit" class="remove-btn">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
                         </div>
                     </div>
                     {% endfor %}
@@ -355,7 +347,7 @@
                     <span class="summary-label">Total price to pay:</span>
                     <span class="total-value">₹{{ total|default('0') }}</span>
                 </div>
-                <a href="{{ url_for('checkout') }}" class="checkout-btn">
+                <a href="{{ url_for('home') }}" class="checkout-btn">
                     <i class="fa-solid fa-lock" style="margin-right: 8px;"></i>
                     Checkout
                 </a>
