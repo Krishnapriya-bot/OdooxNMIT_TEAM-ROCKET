@@ -584,3 +584,110 @@ button[type="submit"]:focus {
                 width: 100%;
             }
         }
+
+
+
+        /* USER PROFILE*/
+
+        body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+}
+
+.card h2 {
+  color: #2d5c5c;
+  margin-bottom: 10px;
+}
+
+hr {
+  margin: 10px 0 20px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.details p {
+  margin: 10px 0;
+}
+
+.status {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.status.complete {
+  color: green;
+  font-size: 1.1em;
+}
+
+.status.incomplete {
+  color: red;
+  font-size: 1.1em;
+}
+
+.edit-button {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #d4a03c;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #c8902f;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item {
+  background-color: #f3f7f7;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item .price {
+  color: #d4a03c;
+  font-weight: bold;
+  font-size: 1.1em;
+}

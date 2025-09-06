@@ -1,40 +1,72 @@
-{% extends "index.html" %} {% block content %}
-<h2>{{ user.username }}'s Profile</h2>
-{% if user.is_profile_complete() %}
-<span style="color: green; font-size: 2em">&#10004;</span>
-<!-- Green tick -->
-<span>Profile Complete</span>
-{% else %}
-<span style="color: red; font-size: 2em">&#10008;</span>
-<!-- Red cross -->
-<span>Profile Incomplete</span>
-{% endif %}
-<img src="{{ user.profile_pic }}" alt="Profile Picture" width="120" /><br />
-<p><strong>Username:</strong> {{ user.username }}</p>
-<p><strong>Email:</strong> {{ user.email }}</p>
 
-<a href="{{ url_for('edit_profile') }}">Edit Profile</a>
 
-<hr />
-<h3>My Listings</h3>
-<ul>
-  {% for product in user.products %}
-  <li>{{ product.title }} - ₹{{ product.price }}</li>
-  {% else %}
-  <li>No listings yet.</li>
-  {% endfor %}
-</ul>
 
-<hr />
-<h3>My Orders</h3>
-<ul>
-  {% for order in user.orders %}
-  <li>
-    {{ order.product.title }} - ₹{{ order.product.price }} (x{{ order.quantity
-    }})
-  </li>
-  {% else %}
-  <li>No orders yet.</li>
-  {% endfor %}
-</ul>
+{% extends "index.html" %}
+
+{% block content %}
+<div class="profile-container">
+
+  <!-- Profile Info Section -->
+  <div class="card profile-card">
+    <h2>Profile Information</h2>
+    <hr />
+    <div class="profile-info">
+      <img class="profile-pic" src="{{ user.profile_pic }}" alt="Profile Picture" />
+      <div class="details">
+        <p><strong>Username</strong><br>{{ user.username }}</p>
+        <p><strong>Email</strong><br>{{ user.email }}</p>
+
+        {% if user.is_profile_complete() %}
+        <div class="status complete">
+          <span>&#10004;</span> Profile Complete
+        </div>
+        {% else %}
+        <div class="status incomplete">
+          <span>&#10008;</span> Profile Incomplete
+        </div>
+        {% endif %}
+        
+        <a href="{{ url_for('edit_profile') }}" class="edit-button">
+          ✏️ Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Listings -->
+  <div class="card">
+    <h2>My Listings</h2>
+    <hr />
+    <div class="item-list">
+      {% for product in user.products %}
+      <div class="item">
+        <span>📦 {{ product.title }}</span>
+        <span class="price">₹{{ product.price }}</span>
+      </div>
+      {% else %}
+      <p>No listings yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- My Orders -->
+  <div class="card">
+    <h2>My Orders</h2>
+    <hr />
+    <div class="item-list">
+      {% for order in user.orders %}
+      <div class="item">
+        <div>
+          🛒 <strong>{{ order.product.title }}</strong><br />
+          <small>Quantity: {{ order.quantity }}</small>
+        </div>
+        <span class="price">₹{{ order.product.price }}</span>
+      </div>
+      {% else %}
+      <p>No orders yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
 {% endblock %}
